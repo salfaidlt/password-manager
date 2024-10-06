@@ -1,8 +1,9 @@
-import Image from "next/image";
+import MenuOptions from "@/components/menu-options";
 
 export default function Home() {
   return (
-    <div>hello there</div>
-
+    <div className="w-full h-full flex justify-center items-center">
+      <MenuOptions />
+    </div>
   );
 }

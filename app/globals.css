@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+.code {
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: "Courier New", Courier, monospace;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
