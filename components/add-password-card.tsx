@@ -15,6 +15,7 @@ import { Textarea } from "./ui/textarea"
 import { useEffect, useState } from "react"
 import generateStrongPassword from "@/lib/functions"
 import { GeneratePasswordButton } from "./generate-password-button"
+import { db } from "@/lib/db"
 
 interface customPasswordParamsTypes {
     lowerCaseSliderValue: number;
@@ -55,15 +56,17 @@ export function AddPassword() {
     }, [passwordParams])
 
 
-    const saveNewPassword = () => {
+    async function saveNewPassword () {
         let passwordRecord: passwordObjectType = {
             label,
             description,
             password
         }
         setFormData(passwordRecord)
+        
+        const id = await db.passwords.add(formData)
         console.log('====================================');
-        console.log(label, description, password);
+        console.log(`Successfully added ${id}`);
         console.log('====================================');
     }
     return (
