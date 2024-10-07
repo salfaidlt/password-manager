@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "./ui/textarea"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import generateStrongPassword from "@/lib/functions"
 import { GeneratePasswordButton } from "./generate-password-button"
 
@@ -31,10 +31,19 @@ export function AddPassword() {
         digitSliderValue: 0,
         symbolSliderValue: 0,
     })
+    useEffect(() => {
+        setPassword(generateStrongPassword(
+            passwordParams.lowerCaseSliderValue,
+            passwordParams.upperCaseSliderValue,
+            passwordParams.digitSliderValue,
+            passwordParams.symbolSliderValue
+        ))
+    }, [passwordParams])
+
 
     const generateNewPassword = () => {
-        // setPassword(generateStrongPassword())
-        alert(passwordParams.digitSliderValue)
+
+
     }
     return (
         <Card className="w-[350px]">
