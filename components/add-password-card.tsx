@@ -41,11 +41,6 @@ export function AddPassword() {
         digitSliderValue: 0,
         symbolSliderValue: 0,
     })
-    const [formData, setFormData] = useState<passwordObjectType>({
-        label: "",
-        description: "",
-        password: ""
-    })
     useEffect(() => {
         setPassword(generateStrongPassword(
             passwordParams.lowerCaseSliderValue,
@@ -55,19 +50,14 @@ export function AddPassword() {
         ))
     }, [passwordParams])
 
-
     async function saveNewPassword () {
         let passwordRecord: passwordObjectType = {
             label,
             description,
             password
         }
-        setFormData(passwordRecord)
         
-        const id = await db.passwords.add(formData)
-        console.log('====================================');
-        console.log(`Successfully added ${id}`);
-        console.log('====================================');
+        const id = await db.passwords.add(passwordRecord)
     }
     return (
         <Card className="w-[350px]">
