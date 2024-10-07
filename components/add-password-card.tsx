@@ -23,13 +23,27 @@ interface customPasswordParamsTypes {
     symbolSliderValue: number;
 }
 
+interface passwordObjectType {
+    label: string;
+    description: string;
+    password: string
+}
+
 export function AddPassword() {
     const [password, setPassword] = useState("")
+    const [label, setLabel] = useState("")
+    const [description, setDescription] = useState("")
+
     const [passwordParams, setPasswordParams] = useState<customPasswordParamsTypes>({
         lowerCaseSliderValue: 0,
         upperCaseSliderValue: 0,
         digitSliderValue: 0,
         symbolSliderValue: 0,
+    })
+    const [formData, setFormData] = useState<passwordObjectType>({
+        label: "",
+        description: "",
+        password: ""
     })
     useEffect(() => {
         setPassword(generateStrongPassword(
@@ -41,9 +55,16 @@ export function AddPassword() {
     }, [passwordParams])
 
 
-    const generateNewPassword = () => {
-
-
+    const saveNewPassword = () => {
+        let passwordRecord: passwordObjectType = {
+            label,
+            description,
+            password
+        }
+        setFormData(passwordRecord)
+        console.log('====================================');
+        console.log(label, description, password);
+        console.log('====================================');
     }
     return (
         <Card className="w-[350px]">
@@ -56,11 +77,21 @@ export function AddPassword() {
                     <div className="grid w-full items-center gap-4">
                         <div className="flex flex-col space-y-1.5">
                             <Label htmlFor="label">Label</Label>
-                            <Input id="label" placeholder="a label associated to the password" />
+                            <Input 
+                                id="label" 
+                                placeholder="a label associated to the password" 
+                                value={label}
+                                onChange={ (e) => setLabel(e.target.value) }
+                            />
                         </div>
                         <div className="flex flex-col space-y-1.5">
                             <Label htmlFor="description">Description</Label>
-                            <Textarea id="description" placeholder="a description to help you remind what is this password used for" />
+                            <Textarea 
+                                id="description" 
+                                placeholder="a description to help you remind what is this password used for" 
+                                value={description}
+                                onChange={ (e) => setDescription(e.target.value) }
+                            />
                         </div>
                         <div className="flex flex-col space-y-1.5">
                             <Label htmlFor="password">
@@ -74,7 +105,7 @@ export function AddPassword() {
             </CardContent>
             <CardFooter className="flex justify-between">
                 <Button variant="outline">Cancel</Button>
-                <Button onClick={generateNewPassword}>Submit</Button>
+                <Button onClick={saveNewPassword}>Submit</Button>
             </CardFooter>
         </Card>
     )
