@@ -1,162 +1,26 @@
-import CopyToClipboard from "@/components/copy-to-clipboard"
-import EditPassword from "@/components/edit-password"
-import PasswordInput from "@/components/password-input"
-import { Button } from "@/components/ui/button"
-import { Label } from "@/components/ui/label"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Separator } from "@/components/ui/separator"
-import { Switch } from "@/components/ui/switch"
-import { EyeOff } from "lucide-react"
+"use client"
 
+import PasswordRow from "@/components/password-row"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { db } from "@/lib/db"
+import { useLiveQuery } from "dexie-react-hooks"
+
+interface passwordObjectType {
+    id: number;
+    label: string;
+    description: string;
+    password: string
+}
 
 const AllPasswords = () => {
+    const passwords: passwordObjectType[] | undefined = useLiveQuery(() => db.passwords.toArray())
     return (
         <div className="h-auto flex flex-col justify-center items-center">
             <ScrollArea className="w-4/5 h-auto border-foreground">
-                <div>
-                    <div className="flex justify-evenly items-center py-2">
-                        <p>Password Name</p>
-                        <PasswordInput />
-                        <CopyToClipboard />
-                        <EditPassword />
-                    </div>
-                    <Separator />
-                </div>
-                <div>
-                    <div className="flex justify-evenly items-center py-2">
-                        <p>Password Name</p>
-                        <PasswordInput />
-                        <CopyToClipboard />
-                        <EditPassword />
-                    </div>
-                    <Separator />
-                </div>
-                <div>
-                    <div className="flex justify-evenly items-center py-2">
-                        <p>Password Name</p>
-                        <PasswordInput />
-                        <CopyToClipboard />
-                        <EditPassword />
-                    </div>
-                    <Separator />
-                </div>
-                <div>
-                    <div className="flex justify-evenly items-center py-2">
-                        <p>Password Name</p>
-                        <PasswordInput />
-                        <CopyToClipboard />
-                        <EditPassword />
-                    </div>
-                    <Separator />
-                </div>
-                <div>
-                    <div className="flex justify-evenly items-center py-2">
-                        <p>Password Name</p>
-                        <PasswordInput />
-                        <CopyToClipboard />
-                        <EditPassword />
-                    </div>
-                    <Separator />
-                </div>
-                <div>
-                    <div className="flex justify-evenly items-center py-2">
-                        <p>Password Name</p>
-                        <PasswordInput />
-                        <CopyToClipboard />
-                        <EditPassword />
-                    </div>
-                    <Separator />
-                </div>
-                <div>
-                    <div className="flex justify-evenly items-center py-2">
-                        <p>Password Name</p>
-                        <PasswordInput />
-                        <CopyToClipboard />
-                        <EditPassword />
-                    </div>
-                    <Separator />
-                </div>
-                <div>
-                    <div className="flex justify-evenly items-center py-2">
-                        <p>Password Name</p>
-                        <PasswordInput />
-                        <CopyToClipboard />
-                        <EditPassword />
-                    </div>
-                    <Separator />
-                </div>
-                <div>
-                    <div className="flex justify-evenly items-center py-2">
-                        <p>Password Name</p>
-                        <PasswordInput />
-                        <CopyToClipboard />
-                        <EditPassword />
-                    </div>
-                    <Separator />
-                </div>
-                <div>
-                    <div className="flex justify-evenly items-center py-2">
-                        <p>Password Name</p>
-                        <PasswordInput />
-                        <CopyToClipboard />
-                        <EditPassword />
-                    </div>
-                    <Separator />
-                </div>
-                <div>
-                    <div className="flex justify-evenly items-center py-2">
-                        <p>Password Name</p>
-                        <PasswordInput />
-                        <CopyToClipboard />
-                        <EditPassword />
-                    </div>
-                    <Separator />
-                </div>
-                <div>
-                    <div className="flex justify-evenly items-center py-2">
-                        <p>Password Name</p>
-                        <PasswordInput />
-                        <CopyToClipboard />
-                        <EditPassword />
-                    </div>
-                    <Separator />
-                </div>
-                <div>
-                    <div className="flex justify-evenly items-center py-2">
-                        <p>Password Name</p>
-                        <PasswordInput />
-                        <CopyToClipboard />
-                        <EditPassword />
-                    </div>
-                    <Separator />
-                </div>
-                <div>
-                    <div className="flex justify-evenly items-center py-2">
-                        <p>Password Name</p>
-                        <PasswordInput />
-                        <CopyToClipboard />
-                        <EditPassword />
-                    </div>
-                    <Separator />
-                </div>
-                <div>
-                    <div className="flex justify-evenly items-center py-2">
-                        <p>Password Name</p>
-                        <PasswordInput />
-                        <CopyToClipboard />
-                        <EditPassword />
-                    </div>
-                    <Separator />
-                </div>
-                <div>
-                    <div className="flex justify-evenly items-center py-2">
-                        <p>Password Name</p>
-                        <PasswordInput />
-                        <CopyToClipboard />
-                        <EditPassword />
-                    </div>
-                    <Separator />
-                </div>
+                { passwords?.map((password) => (
+                    // <PasswordRow Password={password} />
+                    <PasswordRow {...password} />
+                )) }
             </ScrollArea>
         </div>
     )

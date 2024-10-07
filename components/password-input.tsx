@@ -5,7 +5,7 @@ import { Button } from './ui/button'
 import { Eye, EyeOff } from 'lucide-react'
 
 
-const PasswordInput = () => {
+const PasswordInput = (props: {password: string}) => {
     const [toggle, setToggle] = useState(false)
     
     const maskPassword = () => {
@@ -18,7 +18,7 @@ const PasswordInput = () => {
                 {toggle ? 
                 <div className='flex gap-2'>
                     <EyeOff />
-                    <code className='code bg-foreground text-background'>password</code>
+                    <code className='code bg-foreground text-background'>{props.password}</code>
                 </div> : 
                 <div className='flex gap-2'>
                     <Eye />
